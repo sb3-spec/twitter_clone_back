@@ -26,7 +26,7 @@ SECRET_KEY = 'no^e7hxhokj8j-o9nlk82()qst6k8-(+m!4w(w01mbm!&669tk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com']
 
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet', 'pin', 'delete']
 
@@ -69,7 +69,8 @@ CORS_ALLOWED_ORIGIN = [
     'http://localhost:8000',
     'http://localhost:3000',
     'http://localhost',
-    'http://localhost:80'
+    'http://localhost:80',
+    'https://twitter-clone-drf.herokuapp.com/'
 ]
 
 ROOT_URLCONF = 'twitter_clone_back.urls'
