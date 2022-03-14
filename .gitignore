@@ -1,7 +1,7 @@
 __pychache__/
 db.sqlite3
 migrations/
-/env
+env
 node_modules
 accounts/__pychache__
 accounts/migrations
@@ -9,4 +9,7 @@ profiles/__pychache__
 profiles/migrations
 tweets/__pychache__
 tweets/migrations
-twitter_clone_back/__pychache__
+twitter_clone_back/__pychache_
+static
+static-root
+.vscode
