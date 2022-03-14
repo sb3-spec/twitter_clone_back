@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user %}
+<p>{{ user }}</p>
+{% endif %}
+<div id='root' data-username={{ user }}></div>
+
+{% endblock content %}
