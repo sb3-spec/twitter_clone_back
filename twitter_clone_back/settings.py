@@ -26,7 +26,7 @@ SECRET_KEY = 'no^e7hxhokj8j-o9nlk82()qst6k8-(+m!4w(w01mbm!&669tk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com', 'dreamy-aryabhata-f7d882.netlify.app']
 
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet', 'pin', 'delete']
 
