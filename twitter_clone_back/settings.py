@@ -174,5 +174,3 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
 }
 
-import django_heroku
-django_heroku.settings(locals())
