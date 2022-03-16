@@ -67,6 +67,11 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'https://dreamy-aryabhata-f7d882.netlify.app'
+]
+
 CSRF_TRUSTED_ORIGINS = [
     'https://dreamy-aryabhata-f7d882.netlify.app/',
     'https://dreamy-aryabhata-f7d882.netlify.app'
