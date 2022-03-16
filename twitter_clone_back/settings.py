@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'no^e7hxhokj8j-o9nlk82()qst6k8-(+m!4w(w01mbm!&669tk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com', 'dreamy-aryabhata-f7d882.netlify.app', 'dreamy-aryabhata-f7d882.netlify.app/']
 
@@ -64,7 +64,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 CORS_ALLOWED_ORIGINS = ["*"]
 
 CORS_ALLOW_HEADERS = ['*']
@@ -137,13 +139,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
-STATIC_URL = '/static/'
+
 
 CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
 CORS_URLS_REGEX = r"^/api/.*$"
