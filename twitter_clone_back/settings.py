@@ -65,8 +65,11 @@ MIDDLEWARE = [
     
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://dreamy-aryabhata-f7d882.netlify.app/'
+]
 
 
 ROOT_URLCONF = 'twitter_clone_back.urls'
