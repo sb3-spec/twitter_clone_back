@@ -71,7 +71,7 @@ CORS_ALLOWED_ORIGIN = [
     'http://localhost',
     'http://localhost:80',
     'https://twitter-clone-drf.herokuapp.com/',
-    'https://dreamy-aryabhata-f7d882.netlify.app/'
+    'https://dreamy-aryabhata-f7d882.netlify.app'
 ]
 
 ROOT_URLCONF = 'twitter_clone_back.urls'
