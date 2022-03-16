@@ -65,6 +65,7 @@ MIDDLEWARE = [
     
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = [
@@ -72,10 +73,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://dreamy-aryabhata-f7d882.netlify.app'
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://dreamy-aryabhata-f7d882.netlify.app/',
-    'https://dreamy-aryabhata-f7d882.netlify.app'
-]
+CSRF_TRUSTED_ORIGINS = ["*"]
 
 
 ROOT_URLCONF = 'twitter_clone_back.urls'
@@ -165,7 +163,7 @@ DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += ['rest_framework.renderers.BrowsableAPIRenderer']
     
-    DEFAULT_AUTHENTICATION_CLASSES += ['twitter_clone_back.rest_api.dev.DevAuthentication']
+    # DEFAULT_AUTHENTICATION_CLASSES += ['twitter_clone_back.rest_api.dev.DevAuthentication']
   
     
 REST_FRAMEWORK = {
