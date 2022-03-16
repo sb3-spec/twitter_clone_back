@@ -7,6 +7,7 @@ import json
 
 User = get_user_model()
 
+@csrf_exempt
 @api_view(['POST'])
 def login_api(request, *args, **kwargs):
     data = request.data
@@ -26,6 +27,7 @@ def logout(request, *args, **kwargs):
     logout(request._request)
     return Response({'details': 'Successfully logged out'},  status=200)
 
+@csrf_exempt
 @api_view(['POST'])
 def register_api(request, *args, **kwargs):
     data = json.loads(request.body)
