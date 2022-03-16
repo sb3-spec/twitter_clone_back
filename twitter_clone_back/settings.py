@@ -28,13 +28,14 @@ SECRET_KEY = 'no^e7hxhokj8j-o9nlk82()qst6k8-(+m!4w(w01mbm!&669tk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com', 'dreamy-aryabhata-f7d882.netlify.app', 'dreamy-aryabhata-f7d882.netlify.app/']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com', 'localhost:8000']
 
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'https://dreamy-aryabhata-f7d882.netlify.app'
+]
 CORS_ALLOW_CREDENTIALS = True
-
-CSRF_TRUSTED_ORIGINS = ["*"]
 
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet', 'pin', 'delete']
 
@@ -64,9 +65,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -100,9 +101,18 @@ WSGI_APPLICATION = 'twitter_clone_back.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+    
+    'default' : {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "d5k5m52kasi1vo",
+        'USER': 'fbgnfukxiyhmvg',
+        'PASSWORD' : '363933473cc7a6d3dfe14826ffd0172da881068011a7482ebc4105bc13b95c1a',
+        'HOST': 'ec2-34-228-154-153.compute-1.amazonaws.com',
+        'PORT': ''
     }
 }
 

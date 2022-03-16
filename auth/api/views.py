@@ -11,7 +11,14 @@ User = get_user_model()
 @api_view(['POST'])
 def login_api(request, *args, **kwargs):
     data = request.data
-    user = authenticate(username=data['username'], password=data['password'])
+    user = User.objects.filter(username=data.get('username')).first()
+
+    if not user:
+        return Response({'error': 'user does not exist'}, status=400)
+    
+    if not user.password == data.get('password'):
+        user = None
+    
 
     if not user:
         return Response({'details': 'Incorrect username or password'}, status=400)

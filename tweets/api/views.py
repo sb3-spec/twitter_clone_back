@@ -98,6 +98,7 @@ def tweet_create_view(request, *args, **kwargs):
    
     if serializer.is_valid(raise_exception=True):
         obj = serializer.create(serializer.data, user)
+        print(obj.content)
         tweet_serializer = TweetSerializer(obj)
         return Response(tweet_serializer.data, 201)
     return Response({}, status=400)
