@@ -30,6 +30,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'twitter-clone-drf.herokuapp.com', 'dreamy-aryabhata-f7d882.netlify.app', 'dreamy-aryabhata-f7d882.netlify.app/']
 
+CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = ["*"]
+
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet', 'pin', 'delete']
 
 
@@ -66,16 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
 ]
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'https://dreamy-aryabhata-f7d882.netlify.app',
-]
-
-CSRF_TRUSTED_ORIGINS = ["*"]
 
 
 ROOT_URLCONF = 'twitter_clone_back.urls'
