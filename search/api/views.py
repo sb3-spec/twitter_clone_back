@@ -24,8 +24,8 @@ def authenticate_user(user):
 def search_results(request, *args, **kwargs):
     search_term = request.data['search_term']
     user = get_profile_by_username(request)
-    if authenticate_user(user):
-        return authenticate_user(user)
+    if not user:
+        return Response({"details": "User could not be found"}, status=404)
     tweet_qs = Tweet.objects.search(search_term)
     tweet_serializer = TweetSerializer(tweet_qs, many=True)
     
