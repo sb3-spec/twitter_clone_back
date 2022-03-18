@@ -26,7 +26,7 @@ class ProfileQuerySet(models.QuerySet):
         relevant_profiles = []
         for profile in self:
             user = profile.user
-            if search_term in profile.user.username:
+            if search_term in profile.username:
                 relevant_profiles.append(profile)
             elif profile.bio and search_term in profile.bio:
                 relevant_profiles.append(profile)
@@ -34,7 +34,6 @@ class ProfileQuerySet(models.QuerySet):
                 relevant_profiles.append(profile)
             elif (user.last_name and search_term in user.first_name):
                 relevant_profiles.append(profile)
-        print(relevant_profiles)
         return relevant_profiles
     
     def follow_suggester(self, profile):
