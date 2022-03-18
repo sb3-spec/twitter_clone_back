@@ -23,7 +23,7 @@ def authenticate_user(user):
 @api_view(['GET', 'POST'])
 def search_results(request, *args, **kwargs):
     search_term = request.data['search_term']
-    user = get_profile_by_username(request)
+    user = get_user_by_username(request)
     if not user:
         return Response({"details": "User could not be found"}, status=404)
     tweet_qs = Tweet.objects.search(search_term)
@@ -41,11 +41,10 @@ def search_results(request, *args, **kwargs):
     
     return Response({"profiles": profile_serializer.data, "tweets": tweet_serializer.data}, status=200)
     
-def get_profile_by_username(request):
+def get_user_by_username(request):
     user = request.data['user']
-
     username = user['username']
-    qs = Profile.objects.filter(user__username=username)
+    qs = User.objects.filter(username=username)
     if not qs.exists():
         return None
     return qs.first()
