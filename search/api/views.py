@@ -11,13 +11,6 @@ from tweets.models import Tweet
 User = get_user_model()
 
 
-def get_user_via_sessionid(request):
-    user_id = request.session.get('_auth_user_id')
-    qs = User.objects.filter(id=user_id)
-    if not qs.exists():
-        return User.objects.filter(username='rob').first()
-    return qs.first()
-
 def authenticate_user(user):
     if not user:
         return Response({"details": "User could not be found"}, status=404)
@@ -30,7 +23,7 @@ def authenticate_user(user):
 @api_view(['GET', 'POST'])
 def search_results(request, *args, **kwargs):
     search_term = request.data['search_term']
-    user = get_user_via_sessionid(request)
+    user = get_profile_by_username(request)
     if authenticate_user(user):
         return authenticate_user(user)
     tweet_qs = Tweet.objects.search(search_term)
@@ -44,8 +37,17 @@ def search_results(request, *args, **kwargs):
     
     
     if not tweet_qs and not profile_qs:
-        return Response({"details": "no results found"}, status=404)
+        return Response({"details": "no results found"}, status=200)
     
     return Response({"profiles": profile_serializer.data, "tweets": tweet_serializer.data}, status=200)
     
+def get_profile_by_username(request):
+    user = request.data['user']
+
+    username = user['username']
+    qs = Profile.objects.filter(user__username=username)
+    if not qs.exists():
+        return None
+    return qs.first()
+
     

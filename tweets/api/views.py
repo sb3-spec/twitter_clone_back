@@ -105,7 +105,6 @@ def tweet_create_view(request, *args, **kwargs):
 
 @api_view(['DELETE', 'POST'])
 def tweet_delete_view(request, tweet_id, *args, **kwargs):
-    data = request.data
     user = get_user_by_username(request)
     if authenticate_user(user):
         return authenticate_user(user)
