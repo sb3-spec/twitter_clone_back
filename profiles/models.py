@@ -26,7 +26,7 @@ class ProfileQuerySet(models.QuerySet):
         relevant_profiles = []
         for profile in self:
             user = profile.user
-            if search_term in profile.username:
+            if search_term in profile.user.username:
                 relevant_profiles.append(profile)
             elif profile.bio and search_term in profile.bio:
                 relevant_profiles.append(profile)
