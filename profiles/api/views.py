@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import get_user_model
 
+from urllib.parse import unquote
+
 from ..models import Profile
 from ..serializers import PublicProfileSerializer, ProfileEditSerializer
 
@@ -12,9 +14,11 @@ User = get_user_model()
 
 @api_view(['GET', 'POST'])
 def follower_suggestions_api(request, *args, **kwargs):
-    user = get_user_by_username(request)
-    if authenticate_user(user):
-        return authenticate_user(user)
+    email = unquote(request.query_params.get('email'))
+    user = User.objects.filter(email=email).first()
+    
+    if not user:
+        return Response(status=404, message='User not found')
     profile = Profile.objects.filter(user=user).first()
     qs = Profile.objects.follow_suggester(profile)
     serializer = PublicProfileSerializer(qs, many=True)

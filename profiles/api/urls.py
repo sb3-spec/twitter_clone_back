@@ -11,7 +11,7 @@ urlpatterns = [
     path('edit', api_edit_profile),
     path('image_update', update_profile_pic_api),
     path('auth', api_get_curr_profile),
-    path('suggestions', follower_suggestions_api),
+    path('<str:email>/suggestions', follower_suggestions_api),
     path('follow', follow_api),
     path('<str:username>', profile_detail_api_view),
 ]

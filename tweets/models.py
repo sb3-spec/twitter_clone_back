@@ -27,8 +27,8 @@ class TweetManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return TweetQuerySet(self.model, using=self._db)  
     
-    def feed(self, user):
-        return self.get_queryset().feed(user)
+    def feed(self, email):
+        return self.get_queryset().feed(email)
     
     def user_tweets(self, username):
         return self.get_queryset().user_tweets(username)
@@ -52,7 +52,9 @@ class TweetQuerySet(models.QuerySet):
     def by_username(self, username):
         return self.filter(user__username=username)
     
-    def feed(self, user):
+    def feed(self, email):
+        user = User.objects.filter(email=email).first()
+        
         profile_exists = user.following.exists()
         followed_users_id = []
         if profile_exists:

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from urllib.parse import unquote
 import json
 
 from django.contrib.auth import get_user_model
@@ -21,10 +22,12 @@ User = get_user_model()
 
 @api_view(['GET', 'POST'])
 def api_get_trending_tweets(request, *args, **kwargs):
-    user = get_user_by_username(request)
-    if authenticate_user(user):
-        return authenticate_user(user)
     
+    email = unquote(request.query_params.get('email'))
+    user = User.objects.filter(email=email).first()
+    
+    if not user:
+        return Response({'error': 'user could not be found'})
     qs = Tweet.objects.trending_weekly()
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
@@ -47,9 +50,10 @@ def api_get_retweets(request, username, *args, **kwargs):
     else:
         return Response(serializer.data, status=200)
 
-@api_view(['GET', 'POST'])
-def api_get_user_tweets(request, username, *args, **kwargs):
-    user = User.objects.filter(username=username).first()
+@api_view(['GET'])
+def api_get_user_tweets(request, *args, **kwargs):
+    email = unquote(request.query_params['email'])
+    user = User.objects.filter(email=email).first()
     
     if not user:
         return Response({"details": "user does not exist"}, status=404)
@@ -170,15 +174,15 @@ def get_paginated_queryset_response(qs, request):
     return paginator.get_paginated_response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
-def tweet_feed_view(request, *args, **kwargs):    
-    user = get_user_by_username(request)    
+@api_view(['GET'])
+def tweet_feed_view(request, *args, **kwargs):   
+    user_email = unquote(request.query_params.get('email'))
      
-    if authenticate_user(user):
-        return authenticate_user(user)
+    qs = User.objects.filter(email=user_email)
     
-    qs = Tweet.objects.feed(user)
+    qs = Tweet.objects.feed(user_email)
     serializer = TweetSerializer(qs, many=True)
+    print(serializer.data)
 
     return Response(serializer.data, status=200)
     

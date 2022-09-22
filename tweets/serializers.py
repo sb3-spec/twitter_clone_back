@@ -43,6 +43,8 @@ class TweetSerializer(serializers.ModelSerializer):
     user = PublicProfileSerializer(source='user.profile', read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
     parent = TweetCreateSerializer(read_only=True)
+    user_has_retweeted = serializers.SerializerMethodField()
+    user_has_retweeted = serializers.SerializerMethodField()
     
     class Meta: 
         model = Tweet
@@ -53,11 +55,19 @@ class TweetSerializer(serializers.ModelSerializer):
              'likes',
              'is_retweet',
              'parent',
-             'timestamp',         
+             'timestamp',
+             'user_has_retweeted',
+             'user_has_retweeted'         
         ]
         
     def get_likes(self, obj):
         return obj.likes.count()
+    
+    def get_user_has_liked(self, obj):
+        return True
+    
+    def get_user_has_retweeted(self, obj):
+        return True
     
 
     
